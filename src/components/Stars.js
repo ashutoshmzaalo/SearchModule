@@ -13,22 +13,6 @@ import "./style.css";
 const Stars = ({ starRails }) => {
   return (
     <Flex flexDirection="column">
-      
-      <Button
-        ml="1330"
-        mr="5"
-        as="h1"
-        fontWeight="bold"
-        size="md"
-        letterSpacing="md"
-        color="blue.400"
-        background="none"
-        // key={Data}
-        //value={Data}
-        //src=""
-      >
-        View All
-      </Button>
       <Flex>
         <Grid
           templateColumns={{
@@ -52,16 +36,13 @@ const Stars = ({ starRails }) => {
             flexDirection="row"
             w="535%"
             overflowY="hidden"
-            justifyContent="space-between"
             gap="10"
           >
             {starRails.map((Data) => (
-              <Link _hover={{ textDecor: "none" }}>
+              <Link _hover={{ transform: "scale(1.1)", dropShadow: "lg" }}>
                 <Box
                   w="200px"
-                
                   borderRadius="lg"
-                  bgColor="#dddddd"
                   transition="all"
                   _hover={{ shadow: "md" }}
                 >
@@ -72,26 +53,20 @@ const Stars = ({ starRails }) => {
                     w="100%"
                     objectFit="cover"
                   ></Image>
-
-                  <Flex
-                    py="4"
-                    px="4"
-                    direction="column"
-                    justifyContent="space-between"
-                  >
-                    <Heading
-                      key={Data}
-                      value={Data}
-                      src={Data.title}
-                      as="h4"
-                      fontSize="md"
-                      mb="3"
-                      Color="black"
-                    >
-                      {Data.title}
-                    </Heading>
-                  </Flex>
                 </Box>
+                <Flex py="4" px="4" direction="column">
+                  <Heading
+                    key={Data}
+                    value={Data}
+                    src={Data.title}
+                    as="h4"
+                    fontSize="md"
+                    mb="3"
+                    color="gray.300"
+                  >
+                    {Data.title}
+                  </Heading>
+                </Flex>
               </Link>
             ))}
           </Flex>

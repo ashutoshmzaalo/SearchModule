@@ -1,11 +1,20 @@
 import Viewalls from "./Viewalls";
-import { Flex, Heading } from "@chakra-ui/react";
+import {
+  Flex,
+  Grid,
+  Link,
+  Box,
+  Image,
+  Heading,
+  Container,
+} from "@chakra-ui/react";
 
 import "./style.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import ViewallTrailer from "./ViewallTrailer";
 
-const MoviesViewall = () => {
+const TrailerViewall = () => {
   const [viewAll, SetviewAll] = useState([]);
   let { search, catalog } = useParams();
 
@@ -14,13 +23,15 @@ const MoviesViewall = () => {
   }, []);
   console.log(search);
   const ViewAll = async () => {
-    const viewMovie = `https://staging.mzaalo.com/search/viewall?search=${search}&index=${catalog}&page=1`;
-    const ViewMovie = await fetch(viewMovie);
-    const AllMovie = await ViewMovie.json().then((Data) => {
+    //let message = "baj";
+    //let message = document.getElementById("message").value;
+    const viewTrailer = `https://staging.mzaalo.com/search/viewall?search=${search}&index=${catalog}&page=1`;
+    const ViewTrailer = await fetch(viewTrailer);
+    const AllTrailer = await ViewTrailer.json().then((Data) => {
       SetviewAll(Data?.data.detail);
     });
     console.log(viewAll);
-    console.log(AllMovie);
+    console.log(AllTrailer);
   };
 
   return (
@@ -34,14 +45,14 @@ const MoviesViewall = () => {
         mt="40"
         ml="20"
       >
-        All Movies:
+        All Trailer:
       </Heading>
 
       <Flex alignItems="center" ml="10">
-        <Viewalls rails={viewAll} />{" "}
+        <ViewallTrailer rails={viewAll} />{" "}
       </Flex>
     </Flex>
   );
 };
 
-export default MoviesViewall;
+export default TrailerViewall;

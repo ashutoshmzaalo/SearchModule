@@ -4,8 +4,9 @@ import { Flex, Heading } from "@chakra-ui/react";
 import "./style.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import ViewallClips from "./ViewallClips";
 
-const MoviesViewall = () => {
+const ClipsViewall = () => {
   const [viewAll, SetviewAll] = useState([]);
   let { search, catalog } = useParams();
 
@@ -14,13 +15,14 @@ const MoviesViewall = () => {
   }, []);
   console.log(search);
   const ViewAll = async () => {
-    const viewMovie = `https://staging.mzaalo.com/search/viewall?search=${search}&index=${catalog}&page=1`;
-    const ViewMovie = await fetch(viewMovie);
-    const AllMovie = await ViewMovie.json().then((Data) => {
+    const viewClip = `https://staging.mzaalo.com/search/viewall?search=${search}&index=${catalog}&page=1`;
+    const ViewClip = await fetch(viewClip);
+
+    const AllClips = await ViewClip.json().then((Data) => {
       SetviewAll(Data?.data.detail);
     });
     console.log(viewAll);
-    console.log(AllMovie);
+    console.log(AllClips);
   };
 
   return (
@@ -34,14 +36,14 @@ const MoviesViewall = () => {
         mt="40"
         ml="20"
       >
-        All Movies:
+        All Clips:
       </Heading>
 
       <Flex alignItems="center" ml="10">
-        <Viewalls rails={viewAll} />{" "}
+        <ViewallClips rails={viewAll} />{" "}
       </Flex>
     </Flex>
   );
 };
 
-export default MoviesViewall;
+export default ClipsViewall;

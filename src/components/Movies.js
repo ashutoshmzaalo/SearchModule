@@ -15,7 +15,6 @@ import "./style.css";
 const Movies = ({ rails }) => {
   return (
     <Flex flexDirection="column">
-      <Flex></Flex>
       <Flex spaceBetween="">
         <Grid
           templateColumns={{
@@ -39,17 +38,15 @@ const Movies = ({ rails }) => {
             flexDirection="row"
             w="535%"
             overflowY="hidden"
-            justifyContent="space-between"
             gap="10"
           >
             {rails.map((Data) => (
-              <Link _hover={{ textDecor: "none" }}>
+              <Link _hover={{ transform: "scale(1.1)", dropShadow: "lg" }}>
                 <Box
                   w="200px"
                   borderRadius="md"
-                  bgColor="#dddddd"
                   transition="all"
-                  _hover={{ shadow: "md" }}
+                  _hover={{ shadow: "lg" }}
                 >
                   <Image
                     key={Data}
@@ -59,27 +56,21 @@ const Movies = ({ rails }) => {
                     w="100%"
                     objectFit="cover"
                   ></Image>
-
-                  <Flex
-                    py="2"
-                    px="3"
-                    direction="column"
-                    justifyContent="space-between"
-                  >
-                    <Heading
-                      key={Data}
-                      value={Data}
-                      src={Data.title}
-                      as="h4"
-                      fontSize="md"
-                      mb="3"
-                      Color="black"
-                      w="100%"
-                    >
-                      {Data.title}
-                    </Heading>
-                  </Flex>
                 </Box>
+                <Flex py="2" px="3" direction="column">
+                  <Heading
+                    key={Data}
+                    value={Data}
+                    src={Data.title}
+                    as="h4"
+                    fontSize="md"
+                    mb="3"
+                    color="gray.300"
+                    w="100%"
+                  >
+                    {Data.title}
+                  </Heading>
+                </Flex>
               </Link>
             ))}
           </Flex>

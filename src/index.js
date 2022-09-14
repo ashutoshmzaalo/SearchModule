@@ -9,6 +9,5 @@ root.render(
   <ChakraProvider>
     <App tab="home" />
   </ChakraProvider>,
-
   document.querySelector("#root")
 );

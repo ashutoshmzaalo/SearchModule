@@ -1,34 +1,9 @@
-import {
-  Flex,
-  Link,
-  Box,
-  Image,
-  Heading,
-  Grid,
-  Button,
-  Container,
-} from "@chakra-ui/react";
+import { Flex, Link, Box, Image, Heading, Grid } from "@chakra-ui/react";
 import "./style.css";
 
 const Originals = ({ originalRails }) => {
   return (
     <Flex flexDirection="column">
-      <Button
-        ml="1330"
-        mr="5"
-        as="h1"
-        fontWeight="bold"
-        size="md"
-        letterSpacing="md"
-        color="blue.400"
-        background="none"
-        // key={Data}
-        //value={Data}
-        //src=""
-      >
-        View All
-      </Button>
-
       <Flex>
         <Grid
           templateColumns={{
@@ -53,15 +28,13 @@ const Originals = ({ originalRails }) => {
             flexDirection="row"
             w="535%"
             overflowY="hidden"
-            justifyContent="space-between"
             gap="10"
           >
             {originalRails.map((Data) => (
-              <Link _hover={{ textDecor: "none" }}>
+              <Link _hover={{ transform: "scale(1.1)", dropShadow: "lg" }}>
                 <Box
                   w="300px"
                   borderRadius="lg"
-                  bgColor="#dddddd"
                   transition="all"
                   _hover={{ shadow: "md" }}
                 >
@@ -72,27 +45,21 @@ const Originals = ({ originalRails }) => {
                     w="200%"
                     objectFit="cover"
                   ></Image>
-
-                  <Flex
-                    py="2"
-                    px="3"
-                    direction="column"
-                    justifyContent="space-between"
-                  >
-                    <Heading
-                      key={Data}
-                      value={Data}
-                      src={Data.title}
-                      as="h3"
-                      fontSize="sm"
-                      mb="3"
-                      w="100%"
-                      Color="black"
-                    >
-                      {Data.title}
-                    </Heading>
-                  </Flex>
                 </Box>
+                <Flex py="2" px="3" direction="column">
+                  <Heading
+                    key={Data}
+                    value={Data}
+                    src={Data.title}
+                    as="h3"
+                    fontSize="sm"
+                    mb="3"
+                    w="100%"
+                    color="gray.300"
+                  >
+                    {Data.title}
+                  </Heading>
+                </Flex>
               </Link>
             ))}
           </Flex>

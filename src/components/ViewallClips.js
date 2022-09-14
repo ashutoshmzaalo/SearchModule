@@ -10,7 +10,7 @@ import {
   GridItem,
 } from "@chakra-ui/react";
 
-const Viewalls = ({ rails }) => {
+const ViewallClips = ({ rails }) => {
   return (
     <Flex flexDirection="column" w="500">
       <Flex>
@@ -37,6 +37,8 @@ const Viewalls = ({ rails }) => {
             position="absolute"
             w="500%"
             display="contents"
+            //overflowX="
+            // justifyContent="space-between"
             gap="5"
           >
             {rails.map((Data) => (
@@ -52,7 +54,7 @@ const Viewalls = ({ rails }) => {
                     key={Data}
                     value={Data}
                     //src="Image.png"
-                    src={Data.images["17"]}
+                    src={Data.images["1025"]}
                     w="100%"
                     objectFit="cover"
                   ></Image>
@@ -61,6 +63,7 @@ const Viewalls = ({ rails }) => {
                   py="2"
                   px="3"
                   //direction="column"
+                  justifyContent="space-between"
                 >
                   <Heading
                     key={Data}
@@ -84,4 +87,4 @@ const Viewalls = ({ rails }) => {
   );
 };
 
-export default Viewalls;
+export default ViewallClips;
