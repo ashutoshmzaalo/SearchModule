@@ -2,6 +2,15 @@ import { Flex, Link, Box, Image, Heading, Grid } from "@chakra-ui/react";
 import "./style.css";
 
 const Clips = ({ clipRails }) => {
+   const getimageid = (Data) => {
+     if (Data["1025"]) {
+       return Data["1025"];
+     }
+     if (Data["17"]) {
+       return Data["17"];
+     }
+     //console.log(Data["8"], "checkid");
+   };
   return (
     <Flex flexDirection="column">
       <Flex>
@@ -38,17 +47,16 @@ const Clips = ({ clipRails }) => {
                   transition="all"
                   _hover={{ shadow: "md" }}
                 >
-                  <Box position="relative">
-                    <Image
-                      key={Data}
-                      value={Data}
-                      src={Data.images["1025"]}
-                      w="250%"
-                      objectFit="cover"
-                    ></Image>
-                  </Box>
+                  <Image
+                    key={Data}
+                    value={Data}
+                    src={getimageid(Data.images)}
+                    //src={Data.images["1025"]}
+                    w="250%"
+                    objectFit="cover"
+                  ></Image>
                 </Box>
-                <Flex py="3" px="4" direction="column">
+                <Flex py="3" px="2" justifyContent="space-between">
                   <Heading
                     key={Data}
                     value={Data}

@@ -9,6 +9,8 @@ import Clips from "./Clips";
 import Originals from "./Originals";
 import Trailers from "./Trailers";
 import Stars from "./Stars";
+import "./count.css";
+import Trending from "./trendingSearch";
 
 const SearchBar = () => {
   const [message, setMessage] = useState("");
@@ -20,7 +22,11 @@ const SearchBar = () => {
   const [auto, setAuto] = useState([]);
   const [allMovie, SetallMovies] = useState([]);
   const [trends, setTrends] = useState([]);
-
+  const [moviecount, setMoviecount] = useState(0);
+  const [originalcount, setOriginalcount] = useState(0);
+  const [trailercount, setTrailercount] = useState(0);
+  const [clipcount, setClipcount] = useState(0);
+  const [starcount, setStarcount] = useState(0);
   const settings = {
     dots: false,
     infinite: true,
@@ -41,11 +47,11 @@ const SearchBar = () => {
     console.log("message", message);
     const URL = `https://staging.mzaalo.com/search/catalog/${message}`;
     const url = `https://staging.mzaalo.com/search/autocomplete/${message}`;
-    // const Trending = `https://staging.mzaalo.com/search/get/trendingSearch `;
-    // const Trend = await fetch(Trending);
-    // const trending = await Trend.json().then((Data) => {
-    //   setTrends(Data?.data.details);
-    // });
+    const Trending = `https://staging.mzaalo.com/search/get/trendingSearch `;
+    const Trend = await fetch(Trending);
+    const trending = await Trend.json().then((Data) => {
+      setTrends(Data?.data.detail);
+    });
     const response = await fetch(url);
     const Response = await fetch(URL);
     const clips = await fetch(URL);
@@ -54,27 +60,33 @@ const SearchBar = () => {
     const star = await fetch(URL);
     const Cataloog = await Response.json().then((Data) => {
       setRails(Data?.data.movie.data);
+      setMoviecount(Data?.data?.movie?.count);
     });
     const autoCom = await response.json().then((data) => {
       setAuto(data?.data);
     });
     const Clip = await clips.json().then((Data) => {
       setClipRails(Data?.data.clip.data);
+      setClipcount(Data?.data?.clip?.count);
     });
     const Original = await original.json().then((Data) => {
       setOriginalRails(Data?.data.original.data);
+      setOriginalcount(Data?.data?.original?.count);
     });
     const Trailer = await trailer.json().then((Data) => {
       setTrailerRails(Data?.data.trailer.data);
+      setTrailercount(Data?.data?.trailer?.count);
     });
     const Star = await star.json().then((Data) => {
       setStarRails(Data?.data.star.data);
+      setStarcount(Data?.data?.star?.count);
     });
 
     //console.log(trending);
     //console.log(autoCom);
     //console.log(Cataloog);
     //console.log(e.target.value);
+    console.log(trending);
   }
   useEffect(() => {
     console.log(localStorage.getItem("message"), "check");
@@ -84,7 +96,10 @@ const SearchBar = () => {
   }, []);
 
   useEffect(() => {
-    getData();
+    if (message.length >= 3) {
+      getData();
+    }
+    console.log(message.length);
   }, [message]);
 
   //console.log(allMovie);
@@ -124,12 +139,13 @@ const SearchBar = () => {
         <Flex
           marginRight={"50px"}
           align="right"
-          color="#DCD7C9"
+          //color="#DCD7C9"
           position="relative"
         >
           <AutoComplete
             id="message"
-            style={{ width: 200, border: 4, color: "#3F4E4F" }}
+            className="inputSearch"
+            style={{ width: 200, border: 4 }}
             onSearch={(e) => handleChange(e)}
             placeholder="input here"
             //defaultValue={message}
@@ -142,35 +158,165 @@ const SearchBar = () => {
           </AutoComplete>
         </Flex>
       </Flex>
-
       <Flex flexDirection="column">
-        <Heading
-          as="h1"
-          color="gray.50"
-          fontWeight="bold"
-          size="md"
-          letterSpacing="md"
-          mt="40"
-          ml="20"
-        >
-          Movies:
-        </Heading>
-        <Link to={`/MoviesViewall/${message}/movie`}>
-          <Button
-            ml="1320"
-            mr="5"
-            as="h1"
-            fontWeight="bold"
-            size="md"
-            letterSpacing="md"
-            color="blue.400"
-            background="none"
-          >
-            View All
-          </Button>
-        </Link>
+        {moviecount !== 0 && (
+          <>
+            <Heading
+              as="h1"
+              color="gray.50"
+              fontWeight="bold"
+              size="md"
+              letterSpacing="md"
+              mt="10%"
+              ml="20"
+            >
+              Movies:
+            </Heading>
+            <Button
+              ml="1280"
+              mr="5"
+              as="h1"
+              fontWeight="bold"
+              size="md"
+              letterSpacing="md"
+              color="blue.400"
+              background="none"
+            >
+              <Link to={`/MoviesViewall/${message}/movie`}>
+                View All {""}({moviecount})
+              </Link>
+            </Button>
 
-        <Movies rails={rails} />
+            <Movies rails={rails} />
+          </>
+        )}
+        {originalcount !== 0 && (
+          <>
+            <Heading
+              as="h1"
+              color="gray.50"
+              fontWeight="bold"
+              size="md"
+              letterSpacing="md"
+              Color="white"
+              mt="10"
+              ml="20"
+            >
+              Originals:
+            </Heading>
+            <Button
+              ml="1280"
+              mr="5"
+              as="h1"
+              fontWeight="bold"
+              size="md"
+              letterSpacing="md"
+              color="blue.400"
+              background="none"
+            >
+              <Link to={`/OriginalViewall/${message}/original`}>
+                View All {""}({originalcount})
+              </Link>
+            </Button>
+
+            <Originals originalRails={originalRails} />
+          </>
+        )}
+        {trailercount !== 0 && (
+          <>
+            <Heading
+              as="h1"
+              color="gray.50"
+              fontWeight="bold"
+              size="md"
+              letterSpacing="md"
+              Color="white"
+              mt="10"
+              ml="20"
+            >
+              Trailers:
+            </Heading>
+            <Button
+              ml="1280"
+              mr="5"
+              as="h1"
+              fontWeight="bold"
+              size="md"
+              letterSpacing="md"
+              color="blue.400"
+              background="none"
+            >
+              <Link to={`/TrailerViewall/${message}/trailer`}>
+                View All {""}({trailercount})
+              </Link>
+            </Button>
+            <Trailers trailerRails={trailerRails} />
+          </>
+        )}
+        {clipcount !== 0 && (
+          <>
+            <Heading
+              as="h1"
+              color="gray.50"
+              fontWeight="bold"
+              size="md"
+              letterSpacing="md"
+              Color="white"
+              mt="10"
+              ml="20"
+            >
+              Clips:
+            </Heading>
+            <Button
+              ml="1280"
+              mr="5"
+              as="h1"
+              fontWeight="bold"
+              size="md"
+              letterSpacing="md"
+              color="blue.400"
+              background="none"
+            >
+              <Link to={`/ClipsViewall/${message}/clip`}>
+                View All {""}({clipcount})
+              </Link>
+            </Button>
+
+            <Clips clipRails={clipRails} />
+          </>
+        )}
+        {starcount !== 0 && (
+          <>
+            <Heading
+              as="h1"
+              color="gray.50"
+              fontWeight="bold"
+              size="md"
+              letterSpacing="md"
+              Color="white"
+              mt="10"
+              ml="20"
+            >
+              Stars:
+            </Heading>
+            <Button
+              ml="1280"
+              mr="5"
+              as="h1"
+              fontWeight="bold"
+              size="md"
+              letterSpacing="md"
+              color="blue.400"
+              background="none"
+            >
+              <Link to={`/StarViewall/${message}/star`}>
+                View All {""}({starcount})
+              </Link>
+            </Button>
+
+            <Stars starRails={starRails} />
+          </>
+        )}
         <Heading
           as="h1"
           color="gray.50"
@@ -178,110 +324,26 @@ const SearchBar = () => {
           size="md"
           letterSpacing="md"
           Color="white"
-          mt="20"
+          mt="5%"
           ml="20"
         >
-          Originals:
+          Trending Search:
         </Heading>
-        <Link to={`/OriginalViewall/${message}/original`}>
-          <Button
-            ml="1320"
-            mr="5"
-            as="h1"
-            fontWeight="bold"
-            size="md"
-            letterSpacing="md"
-            color="blue.400"
-            background="none"
-          >
-            View All
-          </Button>
-        </Link>
-
-        <Originals originalRails={originalRails} />
-        <Heading
+        {/* <Button
+          ml="1280"
+          mr="5"
           as="h1"
-          color="gray.50"
           fontWeight="bold"
           size="md"
           letterSpacing="md"
-          Color="white"
-          mt="20"
-          ml="20"
+          color="blue.400"
+          background="none"
         >
-          Trailers:
-        </Heading>
-        <Link to={`/TrailerViewall/${message}/trailer`}>
-          <Button
-            ml="1320"
-            mr="5"
-            as="h1"
-            fontWeight="bold"
-            size="md"
-            letterSpacing="md"
-            color="blue.400"
-            background="none"
-          >
-            View All
-          </Button>
-        </Link>
-        <Trailers trailerRails={trailerRails} />
-        <Heading
-          as="h1"
-          color="gray.50"
-          fontWeight="bold"
-          size="md"
-          letterSpacing="md"
-          Color="white"
-          mt="20"
-          ml="20"
-        >
-          Clips:
-        </Heading>
-        <Link to={`/ClipsViewall/${message}/clip`}>
-          <Button
-            ml="1320"
-            mr="5"
-            as="h1"
-            fontWeight="bold"
-            size="md"
-            letterSpacing="md"
-            color="blue.400"
-            background="none"
-          >
-            View All
-          </Button>
-        </Link>
-
-        <Clips clipRails={clipRails} />
-        <Heading
-          as="h1"
-          color="gray.50"
-          fontWeight="bold"
-          size="md"
-          letterSpacing="md"
-          Color="white"
-          mt="20"
-          ml="20"
-        >
-          Stars:
-        </Heading>
-        <Link to={`/StarViewall/${message}/star`}>
-          <Button
-            ml="1320"
-            mr="5"
-            as="h1"
-            fontWeight="bold"
-            size="md"
-            letterSpacing="md"
-            color="blue.400"
-            background="none"
-          >
-            View All
-          </Button>
-        </Link>
-
-        <Stars starRails={starRails} />
+          <Link to={``}>
+            View All {""}({})
+          </Link>
+        </Button> */}
+        <Trending trends={trends} />
       </Flex>
     </Flex>
   );

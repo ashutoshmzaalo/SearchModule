@@ -1,0 +1,62 @@
+.pagination {
+  display: flex;
+  align-items: center;
+}
+.arrow\:text {
+  display: block;
+  vertical-align: middle;
+  font-size: 13px;
+  vertical-align: middle;
+}
+.pagination\:number {
+  --size: 32px;
+  --margin: 6px;
+  margin: 0 var(--margin);
+  border-radius: 6px;
+  background: #202020;
+  max-width: auto;
+  min-width: var(--size);
+  height: var(--size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0 6px;
+  @media (hover: hover) {
+    &:hover {
+      background-color: lighten(#202020, 3%);
+    }
+  }
+  
+}
+
+.pagination div {
+  width: 33px;
+  height: 33px;
+  background: rgba(85, 82, 82, 0);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 50%;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #595959;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.pagination div.active {
+  background-color: #6696ff;
+  color: rgb(255, 255, 255);
+}
+
+.pagination div.pagination-arrow {
+  font-size: 24px;
+  color: #0055ff;
+  background-color: #ffffff00;
+}
+
+.pagination div.pagination-arrow.inactive {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
