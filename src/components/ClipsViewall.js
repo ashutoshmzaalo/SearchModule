@@ -14,14 +14,14 @@ const ClipsViewall = () => {
   const [totalpage, setTotalpage] = useState(0);
 
   const handlePageClick = async (data) => {
-    console.log(data.selected + 1);
+    // console.log(data.selected + 1);
     let Page = data.selected + 1;
     setActivePage(Page);
   };
   useEffect(() => {
     ViewAll();
   }, [activePage]);
-  console.log(search);
+  // console.log(search);
   const ViewAll = async () => {
     const viewClip = `https://staging.mzaalo.com/search/viewall?search=${search}&index=${catalog}&page=${activePage}`;
     const ViewClip = await fetch(viewClip);
@@ -32,8 +32,8 @@ const ClipsViewall = () => {
       let totalPages = Math.ceil(Data?.data?.count / 10);
       setTotalpage(totalPages);
     });
-    console.log(viewAll);
-    console.log(AllClips);
+    // console.log(viewAll);
+    // console.log(AllClips);
   };
 
   return (

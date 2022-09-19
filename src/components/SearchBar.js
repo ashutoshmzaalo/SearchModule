@@ -88,10 +88,10 @@ const SearchBar = () => {
     //console.log(autoCom);
     //console.log(Cataloog);
     //console.log(e.target.value);
-    console.log(trending);
+   // console.log(trending);
   }
   useEffect(() => {
-    console.log(localStorage.getItem("message"), "check");
+    //console.log(localStorage.getItem("message"), "check");
     if (localStorage.getItem("message") !== "") {
       setMessage(localStorage.getItem("message"));
     }
@@ -101,7 +101,7 @@ const SearchBar = () => {
     if (message.length >= 3) {
       getData();
     }
-    console.log(message.length);
+    //console.log(message.length);
   }, [message]);
 
   //console.log(allMovie);

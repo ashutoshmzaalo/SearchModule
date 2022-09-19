@@ -23,7 +23,7 @@ const TrailerViewall = () => {
   const [totalpage, setTotalpage] = useState(0);
 
   const handlePageClick = async (data) => {
-    console.log(data.selected + 1);
+    // console.log(data.selected + 1);
     let Page = data.selected + 1;
     setActivePage(Page);
   };
@@ -31,7 +31,7 @@ const TrailerViewall = () => {
   useEffect(() => {
     ViewAll();
   }, [activePage]);
-  console.log(search);
+  // console.log(search);
   const ViewAll = async () => {
     //let message = "baj";
     //let message = document.getElementById("message").value;
@@ -43,8 +43,8 @@ const TrailerViewall = () => {
       let totalPages = Math.ceil(Data?.data?.count / 10);
       setTotalpage(totalPages);
     });
-    console.log(viewAll);
-    console.log(AllStar);
+    // console.log(viewAll);
+    // console.log(AllStar);
   };
 
   return (
