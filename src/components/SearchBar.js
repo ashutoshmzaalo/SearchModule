@@ -88,7 +88,7 @@ const SearchBar = () => {
     //console.log(autoCom);
     //console.log(Cataloog);
     //console.log(e.target.value);
-   // console.log(trending);
+    // console.log(trending);
   }
   useEffect(() => {
     //console.log(localStorage.getItem("message"), "check");
@@ -98,7 +98,7 @@ const SearchBar = () => {
   }, []);
 
   useEffect(() => {
-    if (message.length >= 3) {
+    if (message != null && message.length >= 3) {
       getData();
     }
     //console.log(message.length);
@@ -319,21 +319,21 @@ const SearchBar = () => {
             <Stars starRails={starRails} />
           </>
         )}
-        {trendcount!== 0 && (
+        {trendcount !== 0 && (
           <>
-        <Heading
-          as="h1"
-          color="gray.50"
-          fontWeight="bold"
-          size="md"
-          letterSpacing="md"
-          Color="white"
-          mt="5%"
-          ml="20"
-        >
-          Trending Search:
-        </Heading>
-        {/* <Button
+            <Heading
+              as="h1"
+              color="gray.50"
+              fontWeight="bold"
+              size="md"
+              letterSpacing="md"
+              Color="white"
+              mt="5%"
+              ml="20"
+            >
+              Trending Search:
+            </Heading>
+            {/* <Button
           ml="1280"
           mr="5"
           as="h1"
@@ -347,8 +347,8 @@ const SearchBar = () => {
             View All {""}({})
           </Link>
         </Button> */}
-        <Trending trends={trends} />
-        </>
+            <Trending trends={trends} />
+          </>
         )}
       </Flex>
     </Flex>
