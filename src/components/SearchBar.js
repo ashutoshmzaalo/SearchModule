@@ -27,6 +27,7 @@ const SearchBar = () => {
   const [trailercount, setTrailercount] = useState(0);
   const [clipcount, setClipcount] = useState(0);
   const [starcount, setStarcount] = useState(0);
+  const [trendcount, setTrendcount] = useState(0);
   const settings = {
     dots: false,
     infinite: true,
@@ -51,6 +52,7 @@ const SearchBar = () => {
     const Trend = await fetch(Trending);
     const trending = await Trend.json().then((Data) => {
       setTrends(Data?.data.detail);
+      setTrendcount(Data?.data?.detail?.count);
     });
     const response = await fetch(url);
     const Response = await fetch(URL);
@@ -317,6 +319,8 @@ const SearchBar = () => {
             <Stars starRails={starRails} />
           </>
         )}
+        {trendcount!== 0 && (
+          <>
         <Heading
           as="h1"
           color="gray.50"
@@ -344,6 +348,8 @@ const SearchBar = () => {
           </Link>
         </Button> */}
         <Trending trends={trends} />
+        </>
+        )}
       </Flex>
     </Flex>
   );
